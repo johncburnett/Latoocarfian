@@ -1,34 +1,17 @@
 /**
- * Lorenz Attractor in OpenGL
+ * Latoocarfian chaotic system in OpenGL
  * 
  * @author John Burnett
- * 
- * TODO
-// * 1) Snake through iterations
- * 2) GUI
- * 3) Recursive seperations
  */
 
-
-import java.awt.BorderLayout;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import javax.media.opengl.*;
 import javax.media.opengl.glu.*;
 import javax.media.opengl.awt.GLCanvas;
-
 import com.jogamp.opengl.util.*;
-
 import java.awt.*;
-
 import javax.swing.*;
-
 import java.awt.event.*;
-
 import javax.swing.event.*;
 
 
@@ -73,7 +56,7 @@ public class Latoocarfian implements GLEventListener,
 	private GL2 gl;
 	private GLU glu;
 	JButton startButton, stopButton, quitButton, resetButton;
-	private JSlider trailLengthSlider, trailSpeedSlider, aSlider, bSlider, cSlider;
+	private JSlider trailLengthSlider, trailSpeedSlider, aSlider, bSlider, cSlider, dSlider;
 	
 	
 	public  Latoocarfian() {
@@ -132,38 +115,48 @@ public class Latoocarfian implements GLEventListener,
 			bottomWest.add(speedLabel);
 			bottomWest.add(trailSpeedSlider);
 			
-			aSlider = new JSlider(0, 50);
-			aSlider.setValue((int)(A));
-			aSlider.setMajorTickSpacing(10);
+			aSlider = new JSlider(-30, 30);
+			aSlider.setValue((int)(A * 10));
+			aSlider.setMajorTickSpacing(5);
 			aSlider.setPaintTicks(true);
-			aSlider.setPaintLabels(true);
+//			aSlider.setPaintLabels(true);
 			aSlider.addChangeListener(this);
 			JLabel aLabel = new JLabel("A");
 			bottomEast.add(aLabel);
 			bottomEast.add(aSlider);
 			
-			bSlider = new JSlider(5, 15);
-			bSlider.setValue((int)(B));
+			bSlider = new JSlider(-30, -30);
+			bSlider.setValue((int)(B * 10));
 			bSlider.setMajorTickSpacing(5);
 			bSlider.setPaintTicks(true);
-			bSlider.setPaintLabels(true);
+//			bSlider.setPaintLabels(true);
 			bSlider.addChangeListener(this);
 			JLabel bLabel = new JLabel("B");
 			bottomEast.add(bLabel);
 			bottomEast.add(bSlider);
 			
-			cSlider = new JSlider(0, 10);
-			cSlider.setValue((int)(C));
+			cSlider = new JSlider(10, 30);
+			cSlider.setValue((int)(C * 20));
 			cSlider.setMajorTickSpacing(5);
 			cSlider.setPaintTicks(true);
-			cSlider.setPaintLabels(true);
+//			cSlider.setPaintLabels(true);
 			cSlider.addChangeListener(this);
 			JLabel cLabel = new JLabel("C");
 			bottomEast.add(cLabel);
 			bottomEast.add(cSlider);
 			
+			dSlider = new JSlider(10, 30);
+			dSlider.setValue((int)(D * 20));
+			dSlider.setMajorTickSpacing(5);
+			dSlider.setPaintTicks(true);
+//			dSlider.setPaintLabels(true);
+			dSlider.addChangeListener(this);
+			JLabel dLabel = new JLabel("D");
+			bottomEast.add(dLabel);
+			bottomEast.add(dSlider);
+			
 			bottomRow.add(bottomWest);
-//			bottomRow.add(bottomEast);
+			bottomRow.add(bottomEast);
 			north.add(topRow, BorderLayout.NORTH);
 			north.add(bottomRow, BorderLayout.SOUTH);
 			frame.add(north, BorderLayout.NORTH);
@@ -199,11 +192,13 @@ public class Latoocarfian implements GLEventListener,
 		} else if (e.getSource() == trailSpeedSlider) {
 			TRAIL_SPEED = trailSpeedSlider.getValue();
 		} else if (e.getSource() == aSlider) {
-			A = aSlider.getValue();
+			A = aSlider.getValue() / 10f;
 		} else if (e.getSource() == bSlider ) {
-			B = bSlider.getValue();
+			B = bSlider.getValue() / 10f;
 		} else if (e.getSource() == cSlider ) {
-			C = cSlider.getValue();
+			C = cSlider.getValue() / 20f;
+		} else if (e.getSource() == dSlider ) {
+			D = cSlider.getValue() / 20f;
 		}
 	}
 	
