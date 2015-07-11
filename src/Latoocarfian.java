@@ -156,7 +156,7 @@ public class Latoocarfian implements GLEventListener,
 			bottomEast.add(dSlider);
 			
 			bottomRow.add(bottomWest);
-			bottomRow.add(bottomEast);
+//			bottomRow.add(bottomEast);
 			north.add(topRow, BorderLayout.NORTH);
 			north.add(bottomRow, BorderLayout.SOUTH);
 			frame.add(north, BorderLayout.NORTH);
