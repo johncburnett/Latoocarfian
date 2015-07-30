@@ -5,20 +5,20 @@
  */
 
 
-import javax.media.opengl.*;
-import javax.media.opengl.glu.*;
-import javax.media.opengl.awt.GLCanvas;
-import com.jogamp.opengl.util.*;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import javax.swing.event.*;
+import javax.media.opengl.*;
+import javax.media.opengl.glu.*;
+import com.jogamp.opengl.util.*;
+import javax.media.opengl.awt.GLCanvas;
 
 
 public class Latoocarfian implements GLEventListener, 
-							   ActionListener, 
-							   ChangeListener, 
-							   KeyListener {
+							   		 ActionListener, 
+							   		 ChangeListener, 
+							   		 KeyListener {
 	
 	public static void main(String[] args) { new Latoocarfian(); }
 	
@@ -47,8 +47,6 @@ public class Latoocarfian implements GLEventListener,
 	private final int FPS = 30;
 	private final float BG[] = {0.9f, 0.9f, 0.9f};
 	
-	private float BAKE[][] = new float[ITER][3];
-	
 	private FPSAnimator animator;
 	private boolean animate = false;
 	
@@ -72,9 +70,6 @@ public class Latoocarfian implements GLEventListener,
 			frame.setLayout(new BorderLayout());
 			JPanel north = new JPanel( new BorderLayout());
 			JPanel topRow = new JPanel();
-//			JPanel bottomRow = new JPanel( new GridLayout(1, 2) );
-//			JPanel bottomWest = new JPanel(new GridLayout(2, 2));
-//			JPanel bottomEast = new JPanel(new GridLayout(3, 2));
 			JPanel bottomRow = new JPanel( new GridLayout(2, 2) );
 			JPanel bottomWest = new JPanel();
 			JPanel bottomEast = new JPanel();
@@ -119,7 +114,6 @@ public class Latoocarfian implements GLEventListener,
 			aSlider.setValue((int)(A * 10));
 			aSlider.setMajorTickSpacing(5);
 			aSlider.setPaintTicks(true);
-//			aSlider.setPaintLabels(true);
 			aSlider.addChangeListener(this);
 			JLabel aLabel = new JLabel("A");
 			bottomEast.add(aLabel);
@@ -129,7 +123,6 @@ public class Latoocarfian implements GLEventListener,
 			bSlider.setValue((int)(B * 10));
 			bSlider.setMajorTickSpacing(5);
 			bSlider.setPaintTicks(true);
-//			bSlider.setPaintLabels(true);
 			bSlider.addChangeListener(this);
 			JLabel bLabel = new JLabel("B");
 			bottomEast.add(bLabel);
@@ -139,7 +132,6 @@ public class Latoocarfian implements GLEventListener,
 			cSlider.setValue((int)(C * 20));
 			cSlider.setMajorTickSpacing(5);
 			cSlider.setPaintTicks(true);
-//			cSlider.setPaintLabels(true);
 			cSlider.addChangeListener(this);
 			JLabel cLabel = new JLabel("C");
 			bottomEast.add(cLabel);
@@ -149,7 +141,6 @@ public class Latoocarfian implements GLEventListener,
 			dSlider.setValue((int)(D * 20));
 			dSlider.setMajorTickSpacing(5);
 			dSlider.setPaintTicks(true);
-//			dSlider.setPaintLabels(true);
 			dSlider.addChangeListener(this);
 			JLabel dLabel = new JLabel("D");
 			bottomEast.add(dLabel);
@@ -168,8 +159,7 @@ public class Latoocarfian implements GLEventListener,
 			
 			frame.setVisible(true);
 
-			animator = new FPSAnimator(canvas, FPS);
-//			animator.start(); 		
+			animator = new FPSAnimator(canvas, FPS);		
 	}
 	
 	
@@ -243,8 +233,6 @@ public class Latoocarfian implements GLEventListener,
 
 	
 	private void update() {
-//		viewX += 0.5;
-//		viewZ -= 0.1;
 		gl.glMatrixMode(GL2.GL_MODELVIEW);
 		gl.glLoadIdentity();
 		glu.gluLookAt(viewX, viewZ, viewY, lookatX, lookatY, lookatZ, 0f, 1f, 0f);  
@@ -311,9 +299,6 @@ public class Latoocarfian implements GLEventListener,
 		}
 		
 		for( int i = 0; i < steps; i++ ) {
-//			float[] hue = {1f, ((float) i)/((float) STEPS), 0f};
-//			gl.glColor3fv(hue, 0);
-			
 			float[] hue = {0.2f, 0.2f, 0.2f + ((float) i)/((float) steps)*0.5f};
 			gl.glColor3fv(hue, 0);
 			
@@ -328,8 +313,6 @@ public class Latoocarfian implements GLEventListener,
 			gl.glPushMatrix();
 				gl.glTranslatef(P[0], P[1], P[2]);
 				GLUquadric quad0 = glu.gluNewQuadric();
-//				glu.gluQuadricOrientation(quad0, glu.GLU_OUTSIDE);
-//				glu.gluQuadricNormals(quad0, glu.GLU_SMOOTH);
 				glu.gluSphere(quad0, RADIUS, 3, 3);
 				glu.gluDeleteQuadric(quad0);
 			gl.glPopMatrix();
@@ -356,7 +339,6 @@ public class Latoocarfian implements GLEventListener,
 
 	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		// this is called when the window is resized
 		gl.glViewport(0, 0, width, height);
 		float aspect = width*1.0f/height;
 		gl.glMatrixMode(GL2.GL_PROJECTION);
